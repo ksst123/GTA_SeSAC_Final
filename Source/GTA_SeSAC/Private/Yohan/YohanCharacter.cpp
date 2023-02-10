@@ -247,9 +247,13 @@ void AYohanCharacter::OnActionAimPressed()
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 		if (bHasGun)
 		{
-			CrosshairUI->AddToViewport();
-			GetCharacterMovement()->bOrientRotationToMovement = false;
-			CameraComponent->SetFieldOfView(60.f);
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			if(PlayerController != nullptr)
+			{
+				CrosshairUI->AddToViewport();
+				GetCharacterMovement()->bOrientRotationToMovement = false;
+				CameraComponent->SetFieldOfView(60.f);
+			}
 		}
 		// GetMesh()->UpdateChildTransforms(EUpdateTransformFlags::None);
 	}
@@ -269,9 +273,13 @@ void AYohanCharacter::OnActionAimReleased()
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 		if (bHasGun)
 		{
-			CrosshairUI->RemoveFromParent();
-			GetCharacterMovement()->bOrientRotationToMovement = true;
-			CameraComponent->SetFieldOfView(90.f);
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			if (PlayerController != nullptr)
+			{
+				CrosshairUI->RemoveFromParent();
+				GetCharacterMovement()->bOrientRotationToMovement = true;
+				CameraComponent->SetFieldOfView(90.f);
+			}
 		}
 	}
 }
