@@ -313,7 +313,9 @@ void AYohanCharacter::OnActionJap()
 		FCollisionQueryParams CollisionParams;
 		CollisionParams.AddIgnoredActor(this);
 
-		DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Red, true, 5.f, 0, 2.f);
+		DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::FColor(255, 200, 0), false, 0.1f, 0, 0.5f);
+
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), PistolEffect, StartTrace);
 
 		bool bHit = GetWorld()->LineTraceSingleByChannel(HitInfo, StartTrace, EndTrace, ECollisionChannel::ECC_Visibility, CollisionParams);
 

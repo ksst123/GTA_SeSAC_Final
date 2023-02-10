@@ -132,10 +132,12 @@ public:
 		int32 PistolDamage = 10;
 
 	UPROPERTY(EditAnywhere, Category = "My Character Settings")
-		class UParticleSystem* BulletEffect;
+	class UParticleSystem* BulletEffect;
+	UPROPERTY(EditAnywhere, Category = "My Character Settings")
+	class UParticleSystem* PistolEffect;
 
 	UPROPERTY(EditAnywhere, Category = "My Character Settings")
-		TSubclassOf<class ABulletActor> BulletFactory;
+	TSubclassOf<class ABulletActor> BulletFactory;
 
 	UPROPERTY()
 	AAIController* AIowner;
