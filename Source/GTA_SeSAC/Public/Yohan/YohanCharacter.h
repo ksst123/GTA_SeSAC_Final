@@ -137,6 +137,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "My Character Settings")
 		TSubclassOf<class ABulletActor> BulletFactory;
 
+	UPROPERTY()
+	AAIController* AIowner;
+
 	void OnActionEnteringCar();
 	void OnActionExitingCar();
 
@@ -180,6 +183,7 @@ public:
 	void OnFistDamagedDie();
 
 	void OnHitUI();
+	void OnHit();
 
 	UPROPERTY()
 	class AInteractableCar* vehicle;
@@ -225,6 +229,11 @@ public:
 	class UUserWidget* HitUI;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> HitUIFactory;
+
+	UPROPERTY(EditAnywhere)
+	class UUserWidget* GameOverUI;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> GameOverUIFactory;
 
 	UFUNCTION()
 	void OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

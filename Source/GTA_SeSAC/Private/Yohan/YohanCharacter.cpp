@@ -22,6 +22,7 @@
 #include "../GTA_SeSACGameModeBase.h"
 #include "DrawDebugHelpers.h"
 #include "Blueprint/UserWidget.h"
+#include "Yohan/PoliceStars.h"
 
 // Sets default values
 AYohanCharacter::AYohanCharacter()
@@ -107,6 +108,9 @@ void AYohanCharacter::BeginPlay()
 
 	CrosshairUI = CreateWidget(GetWorld(), CrosshairFactory);
 	HitUI = CreateWidget(GetWorld(), HitUIFactory);
+	GameOverUI = CreateWidget(GetWorld(), GameOverUIFactory);
+
+	AIowner = Cast<AAIController>(GetController());
 }
 
 // Called every frame
@@ -322,6 +326,12 @@ void AYohanCharacter::OnActionJap()
 				if (enemy->CurrentHP > 0)
 				{
 					enemy->OnDamagedJap();
+					if(enemy->GetController() != nullptr)
+					{
+						enemy->HitUI->AddToViewport();
+						FTimerHandle th;
+						GetWorldTimerManager().SetTimer(th, enemy, &AYohanCharacter::OnHitUI, 0.1f, false);
+					}
 				}
 				else
 				{
@@ -546,11 +556,6 @@ void AYohanCharacter::TraceCover()
 void AYohanCharacter::OnDamagedJap()
 {
 	PlayAnimMontage(BPAnim->Damaged, 1.f, (FName)TEXT("DamagedJap"));
-	HitUI->AddToViewport();
-	FTimerHandle th;
-	GetWorldTimerManager().SetTimer(th, this, &AYohanCharacter::OnHitUI, 0.1f, false);
-	
-	
 }
 
 void AYohanCharacter::OnDamagedStraight()
@@ -568,10 +573,14 @@ void AYohanCharacter::OnHitUI()
 	HitUI->RemoveFromParent();
 }
 
+void AYohanCharacter::OnHit()
+{
+}
+
 void AYohanCharacter::OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AYohanCharacter* player = Cast<AYohanCharacter>(OtherActor);
-	AAIController* AIowner = Cast<AAIController>(player->GetController());
+	AAIController* ownerAI = Cast<AAIController>(player->GetController());
 	if (player == nullptr)
 	{
 		return;
