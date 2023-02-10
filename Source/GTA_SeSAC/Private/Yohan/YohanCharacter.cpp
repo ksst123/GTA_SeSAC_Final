@@ -328,9 +328,13 @@ void AYohanCharacter::OnActionJap()
 					enemy->OnDamagedJap();
 					if(enemy->GetController() != nullptr)
 					{
-						enemy->HitUI->AddToViewport();
-						FTimerHandle th;
-						GetWorldTimerManager().SetTimer(th, enemy, &AYohanCharacter::OnHitUI, 0.1f, false);
+						APlayerController* PlayerController = Cast<APlayerController>(enemy->GetController());
+						if(PlayerController != nullptr)
+						{
+							enemy->HitUI->AddToViewport();
+							FTimerHandle th;
+							GetWorldTimerManager().SetTimer(th, enemy, &AYohanCharacter::OnHitUI, 0.1f, false);
+						}
 					}
 				}
 				else
