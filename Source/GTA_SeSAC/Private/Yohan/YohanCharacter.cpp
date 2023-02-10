@@ -322,6 +322,10 @@ void AYohanCharacter::OnActionJap()
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffect, HitInfo.ImpactPoint);
 
 			AYohanCharacter* enemy = Cast<AYohanCharacter>(HitInfo.GetActor());
+			if(enemy == nullptr)
+			{
+				return;
+			}
 			APlayerController* PlayerController = Cast<APlayerController>(enemy->GetController());
 			if (enemy != nullptr)
 			{
