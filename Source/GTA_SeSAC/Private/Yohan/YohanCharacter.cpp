@@ -278,6 +278,7 @@ void AYohanCharacter::OnActionAimReleased()
 
 void AYohanCharacter::OnActionJap()
 {
+
 	if ((BPAnim->PunchJap != nullptr) && (BPAnim->bIsFighting == true) && (BPAnim->bHasGun != true))
 	{
 		bIsJap = true;
@@ -321,6 +322,7 @@ void AYohanCharacter::OnActionJap()
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), BulletEffect, HitInfo.ImpactPoint);
 
 			AYohanCharacter* enemy = Cast<AYohanCharacter>(HitInfo.GetActor());
+			APlayerController* PlayerController = Cast<APlayerController>(enemy->GetController());
 			if (enemy != nullptr)
 			{
 				if (enemy->CurrentHP > 0)
@@ -328,7 +330,7 @@ void AYohanCharacter::OnActionJap()
 					enemy->OnDamagedJap();
 					if(enemy->GetController() != nullptr)
 					{
-						APlayerController* PlayerController = Cast<APlayerController>(enemy->GetController());
+
 						if(PlayerController != nullptr)
 						{
 							enemy->HitUI->AddToViewport();
@@ -342,7 +344,14 @@ void AYohanCharacter::OnActionJap()
 					enemy->GetMesh()->SetSimulatePhysics(true);
 					enemy->GetMesh()->SetAllBodiesSimulatePhysics(true);
 					enemy->bIsDead = true;
-					GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+					if(PlayerController == nullptr)
+					{
+						GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+					}
+					else
+					{
+						enemy->OnGameOverUI();
+					}
 				}
 			}
 
@@ -577,14 +586,20 @@ void AYohanCharacter::OnHitUI()
 	HitUI->RemoveFromParent();
 }
 
-void AYohanCharacter::OnHit()
+void AYohanCharacter::OnGameOverUI()
 {
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	PlayerController->SetPause(true);
+	PlayerController->SetShowMouseCursor(true);
+	PlayerController->SetInputMode(FInputModeUIOnly());
+	GameOverUI->AddToViewport(10);
 }
 
 void AYohanCharacter::OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AYohanCharacter* player = Cast<AYohanCharacter>(OtherActor);
 	AAIController* ownerAI = Cast<AAIController>(player->GetController());
+	APlayerController* PlayerController = Cast<APlayerController>(player->GetController());
 	if (player == nullptr)
 	{
 		return;
@@ -608,8 +623,14 @@ void AYohanCharacter::OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponen
 		{
 			player->OnFistDamagedDie();
 			player->GetMesh()->SetSimulatePhysics(true);
-			player->bIsDead = true;
-			GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+			if (PlayerController == nullptr)
+			{
+				GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+			}
+			else
+			{
+				player->OnGameOverUI();
+			}
 		}
 
 	}
@@ -626,7 +647,14 @@ void AYohanCharacter::OnFistBeginOverlap(UPrimitiveComponent* OverlappedComponen
 			player->OnFistDamagedDie();
 			player->GetMesh()->SetSimulatePhysics(true);
 			player->bIsDead = true;
-			GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+			if (PlayerController == nullptr)
+			{
+				GameMode->PoliceStarWidget->OnVisibleStar(GameMode->StarIndex++);
+			}
+			else
+			{
+				player->OnGameOverUI();
+			}
 		}
 	}
 

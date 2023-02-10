@@ -183,7 +183,8 @@ public:
 	void OnFistDamagedDie();
 
 	void OnHitUI();
-	void OnHit();
+
+	void OnGameOverUI();
 
 	UPROPERTY()
 	class AInteractableCar* vehicle;
