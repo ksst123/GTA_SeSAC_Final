@@ -188,6 +188,9 @@ public:
 
 	void OnGameOverUI();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnMyPistolAmmoUpdate(int32 current, int32 max);
+
 	UPROPERTY()
 	class AInteractableCar* vehicle;
 

@@ -104,6 +104,11 @@ void AYohanCharacter::BeginPlay()
 	CurrentPistolAmmo = MaxPistolAmmo;
 	CurrentHP = MaxHP;
 
+	if(PlayerController != nullptr)
+	{
+		OnMyPistolAmmoUpdate(CurrentPistolAmmo, MaxPistolAmmo);
+	}
+
 	GameMode = Cast<AGTA_SeSACGameModeBase>(GetWorld()->GetAuthGameMode());
 
 	CrosshairUI = CreateWidget(GetWorld(), CrosshairFactory);
@@ -298,7 +303,12 @@ void AYohanCharacter::OnActionJap()
 	{
 		if (CurrentPistolAmmo > 0)
 		{
-			CurrentPistolAmmo--;
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			if(PlayerController != nullptr)
+			{
+				CurrentPistolAmmo--;
+				OnMyPistolAmmoUpdate(CurrentPistolAmmo, MaxPistolAmmo);
+			}
 		}
 		else
 		{
@@ -457,6 +467,12 @@ void AYohanCharacter::OnActionReload()
 	}
 	PlayAnimMontage(BPAnim->PistolReload, 1, TEXT("PistolReload"));
 	CurrentPistolAmmo = MaxPistolAmmo;
+
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController != nullptr)
+	{
+		OnMyPistolAmmoUpdate(CurrentPistolAmmo, MaxPistolAmmo);
+	}
 }
 
 void AYohanCharacter::OnActionHand()
