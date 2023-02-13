@@ -6,6 +6,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/Pawn.h"
 #include "AIController.h"
+#include "Yohan/YohanCharacter.h"
 
 UBTService_PlayerLocationIfSeen::UBTService_PlayerLocationIfSeen()
 {
@@ -14,7 +15,7 @@ UBTService_PlayerLocationIfSeen::UBTService_PlayerLocationIfSeen()
 
 void UBTService_PlayerLocationIfSeen::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	AYohanCharacter* PlayerPawn = Cast<AYohanCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 	if (PlayerPawn == nullptr)
 	{
 		return;
@@ -31,9 +32,9 @@ void UBTService_PlayerLocationIfSeen::TickNode(UBehaviorTreeComponent& OwnerComp
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerPawn->GetActorLocation());
 	}
-	else
+	/*else
 	{
 		OwnerComp.GetBlackboardComponent()->ClearValue(GetSelectedBlackboardKey());
-	}
+	}*/
 	
 }

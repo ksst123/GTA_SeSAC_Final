@@ -404,6 +404,13 @@ void AYohanCharacter::OnActionEnteringCar()
 	{
 		PlayAnimMontage(BPAnim->EnteringCar, 2.f, TEXT("Default"));
 	}
+
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if(PlayerController == nullptr)
+	{
+		return;
+	}
+	bIsDriving = true;
 }
 
 void AYohanCharacter::OnActionExitingCar()
@@ -417,6 +424,13 @@ void AYohanCharacter::OnActionExitingCar()
 	{
 
 	}
+
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController == nullptr)
+	{
+		return;
+	}
+	bIsDriving = false;
 }
 
 void AYohanCharacter::ChangeInputMapping()
