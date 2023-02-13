@@ -24,5 +24,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	virtual void InitializeComponent() override;
+
+	virtual void SetupPlayerInput(class UInputComponent* PlayerInputComponent)
+	{
+
+	}
+
+
+	UPROPERTY()
+	class AGTA_CitizenCharacter* ownerCitizen;
 };

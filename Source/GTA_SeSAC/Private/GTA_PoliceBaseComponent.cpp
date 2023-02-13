@@ -32,3 +32,8 @@ void UGTA_PoliceBaseComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	// ...
 }
 
+void UGTA_PoliceBaseComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+}
+

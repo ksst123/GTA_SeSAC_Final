@@ -32,3 +32,8 @@ void UGTA_CitizenBaseComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 	// ...
 }
 
+void UGTA_CitizenBaseComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+}
+

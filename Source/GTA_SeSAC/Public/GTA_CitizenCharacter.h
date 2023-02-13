@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "GTA_CitizenCharacter.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FSetupInputDelegate, class UInputComponent*);
+
 UCLASS()
 class GTA_SESAC_API AGTA_CitizenCharacter : public ACharacter
 {

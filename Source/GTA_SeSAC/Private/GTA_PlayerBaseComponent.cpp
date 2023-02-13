@@ -3,6 +3,8 @@
 
 #include "GTA_PlayerBaseComponent.h"
 
+#include "GTA_Player.h"
+
 // Sets default values for this component's properties
 UGTA_PlayerBaseComponent::UGTA_PlayerBaseComponent()
 {
@@ -30,5 +32,12 @@ void UGTA_PlayerBaseComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UGTA_PlayerBaseComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+
+	ownerPlayer = Cast<AGTA_Player>(GetOwner());
 }
 
