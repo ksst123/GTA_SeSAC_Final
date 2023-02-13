@@ -496,23 +496,38 @@ void AYohanCharacter::OnActionHand()
 		return;
 	}
 
-	BPAnim->bHasGun = false;
-	bHasGun = BPAnim->bHasGun;
+
 	Pistol->Destroy();
 
+
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController == nullptr)
+	{
+		return;
+	}
+	BPAnim->bHasGun = false;
+	bHasGun = BPAnim->bHasGun;
 }
 
 void AYohanCharacter::OnActionPistol()
 {
 	Pistol = GetWorld()->SpawnActor<APistol>(PistolClass);
-	BPAnim->bHasGun = true;
-	bHasGun = BPAnim->bHasGun;
+
 
 	Pistol->SetActorRelativeLocation(FVector(-11.f, 3.f, 5.f));
 	Pistol->SetActorRelativeRotation(FRotator(-1.5f, -90.f, 13.f));
 	Pistol->SetActorRelativeScale3D(FVector(0.5f));
 	Pistol->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("GunSocket"));
 	Pistol->SetOwner(this);
+
+
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController == nullptr)
+	{
+		return;
+	}
+	BPAnim->bHasGun = true;
+	bHasGun = BPAnim->bHasGun;
 }
 
 void AYohanCharacter::DoFire()

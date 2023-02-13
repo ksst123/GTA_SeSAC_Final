@@ -4,6 +4,7 @@
 #include "Yohan/BTService_PlayerLocation.h"
 #include "Kismet/Gameplaystatics.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Yohan/YohanCharacter.h"
 
 UBTService_PlayerLocation::UBTService_PlayerLocation()
 {
@@ -14,7 +15,7 @@ void UBTService_PlayerLocation::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	AYohanCharacter* PlayerPawn = Cast<AYohanCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 	if (PlayerPawn == nullptr)
 	{
 		return;

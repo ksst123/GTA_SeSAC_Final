@@ -5,6 +5,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Yohan/YohanCharacter.h"
 
 ABaseEnemyAIController::ABaseEnemyAIController()
 {
@@ -31,7 +32,7 @@ void ABaseEnemyAIController::BeginPlay()
 	Super::BeginPlay();
 
 	// 월드에 있는 플레이어를 참조하기 위해 변수에 담는다.
-	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	PlayerPawn = Cast<AYohanCharacter>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 
 
 	if (PlayerPawn != nullptr)

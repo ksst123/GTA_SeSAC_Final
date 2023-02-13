@@ -33,7 +33,7 @@ private:
 	class UBlackboardComponent* BBBaseEnemy;
 
 	// 월드에 있는 플레이어를 참조하기 위한 변수
-	APawn* PlayerPawn;
+	class AYohanCharacter* PlayerPawn;
 
 	// 플레이어로부터 공격 당했는지 여부
 	bool bIsAttacked = false;
