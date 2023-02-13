@@ -23,6 +23,7 @@
 #include "DrawDebugHelpers.h"
 #include "Blueprint/UserWidget.h"
 #include "Yohan/PoliceStars.h"
+#include "Sound/SoundBase.h"
 
 // Sets default values
 AYohanCharacter::AYohanCharacter()
@@ -294,6 +295,7 @@ void AYohanCharacter::OnActionJap()
 
 	if ((BPAnim->PunchJap != nullptr) && (BPAnim->bIsFighting == true) && (BPAnim->bHasGun != true))
 	{
+		UGameplayStatics::PlaySoundAtLocation(this, PunchSound, GetActorLocation());
 		bIsJap = true;
 		LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		PlayAnimMontage(BPAnim->PunchJap, 1.f, TEXT("Default"));
@@ -301,6 +303,7 @@ void AYohanCharacter::OnActionJap()
 	}
 	else if ((Pistol != nullptr) && (BPAnim->bIsFighting == true) && (BPAnim->bHasGun == true))
 	{
+		UGameplayStatics::PlaySoundAtLocation(this, PistolSound, GetActorLocation());
 		if (CurrentPistolAmmo > 0)
 		{
 			APlayerController* PlayerController = Cast<APlayerController>(GetController());
@@ -383,6 +386,7 @@ void AYohanCharacter::OnActionJap()
 		}
 		DoFire();
 	}
+	
 
 }
 
@@ -390,6 +394,7 @@ void AYohanCharacter::OnActionStraight()
 {
 	if ((BPAnim->PunchStraight != nullptr) && (BPAnim->bIsFighting == true) && (BPAnim->bHasGun != true))
 	{
+		UGameplayStatics::PlaySoundAtLocation(this, PunchSound, GetActorLocation());
 		bIsJap = false;
 		bIsStraight = true;
 		RightFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);

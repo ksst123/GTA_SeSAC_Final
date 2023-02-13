@@ -124,7 +124,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
 		int32 CurrentHP;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
-		int32 MaxHP = 30;
+		int32 MaxHP = 15;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
 		int32 FistDamage = 5;
@@ -141,6 +141,11 @@ public:
 
 	UPROPERTY()
 	AAIController* AIowner;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* PunchSound;
+	UPROPERTY(EditAnywhere)
+	class USoundBase* PistolSound;
 
 	void OnActionEnteringCar();
 	void OnActionExitingCar();

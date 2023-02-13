@@ -20,10 +20,6 @@ void UBTService_HasPlayerGun::TickNode(UBehaviorTreeComponent& OwnerComp, uint8*
 		return;
 	}
 
-	if (OwnerComp.GetAIOwner() == nullptr)
-	{
-		return;
-	}
 
 	if (OwnerComp.GetAIOwner()->LineOfSightTo(PlayerPawn))
 	{
