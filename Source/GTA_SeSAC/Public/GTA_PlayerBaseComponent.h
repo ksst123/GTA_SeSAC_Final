@@ -26,7 +26,7 @@ public:
 
 	virtual void InitializeComponent() override;
 
-	virtual void SetupPlayerInput(class UInputComponent* PlayerInputComponent)
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 	{
 
 	}

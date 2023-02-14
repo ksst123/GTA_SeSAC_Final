@@ -24,5 +24,36 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputShoot;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputAim;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputReload;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Fire Settings")
+	int32 PistolDamage = 10;
+
+
+	UPROPERTY(EditAnywhere)
+	class UUserWidget* CrosshairUI;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> CrosshairFactory;
+
+
+	UPROPERTY(EditAnywhere, Category = "My Fire Settings")
+	class UParticleSystem* BulletEffect;
+	UPROPERTY(EditAnywhere, Category = "My Fire Settings")
+	class UParticleSystem* PistolEffect;
+
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* PistolSound;
+
+
+	void OnActionShoot();
+	void OnActionReload();
+
+	void DoFire();
 };

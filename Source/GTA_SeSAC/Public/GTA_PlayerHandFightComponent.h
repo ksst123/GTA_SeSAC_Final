@@ -24,5 +24,25 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputFocus;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputJap;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputStraight;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
+	int32 FistDamage = 5;
+
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* PunchSound;
+
+
+	void OnActionFocusPressed();
+	void OnActionFocusReleased();
+
+	void OnActionJap();
+	void OnActionStraight();
 };

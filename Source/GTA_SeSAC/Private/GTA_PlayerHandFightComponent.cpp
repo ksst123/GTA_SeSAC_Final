@@ -32,3 +32,19 @@ void UGTA_PlayerHandFightComponent::TickComponent(float DeltaTime, ELevelTick Ti
 	// ...
 }
 
+void UGTA_PlayerHandFightComponent::OnActionFocusPressed()
+{
+}
+
+void UGTA_PlayerHandFightComponent::OnActionFocusReleased()
+{
+}
+
+void UGTA_PlayerHandFightComponent::OnActionJap()
+{
+}
+
+void UGTA_PlayerHandFightComponent::OnActionStraight()
+{
+}
+

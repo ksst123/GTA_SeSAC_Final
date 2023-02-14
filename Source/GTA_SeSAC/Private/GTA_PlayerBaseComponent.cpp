@@ -39,5 +39,7 @@ void UGTA_PlayerBaseComponent::InitializeComponent()
 	Super::InitializeComponent();
 
 	ownerPlayer = Cast<AGTA_Player>(GetOwner());
+
+	ownerPlayer->SetupInputDelegate.AddUObject(this, &UGTA_PlayerBaseComponent::SetupPlayerInputComponent);
 }
 

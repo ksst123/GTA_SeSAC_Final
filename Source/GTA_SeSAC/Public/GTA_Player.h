@@ -28,4 +28,29 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera Settings")
+	class USpringArmComponent* SpringArmComponent;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera Settings")
+	class UCameraComponent* CameraComponent;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputMappingContext* DefaultInputMapping;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
+	int32 CurrentHP;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
+	int32 MaxHP = 15;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UGTA_PlayerMoveComponent* MoveComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UGTA_PlayerHandFightComponent* HandFightComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UGTA_PlayerFireComponent* FireComponent;
+
+
+	FSetupInputDelegate SetupInputDelegate;
 };

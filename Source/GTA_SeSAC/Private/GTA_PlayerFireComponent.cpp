@@ -32,3 +32,15 @@ void UGTA_PlayerFireComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	// ...
 }
 
+void UGTA_PlayerFireComponent::OnActionShoot()
+{
+}
+
+void UGTA_PlayerFireComponent::OnActionReload()
+{
+}
+
+void UGTA_PlayerFireComponent::DoFire()
+{
+}
+
