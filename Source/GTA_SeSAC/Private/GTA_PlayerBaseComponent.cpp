@@ -12,7 +12,7 @@ UGTA_PlayerBaseComponent::UGTA_PlayerBaseComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	bWantsInitializeComponent = true;
 }
 
 
@@ -40,6 +40,6 @@ void UGTA_PlayerBaseComponent::InitializeComponent()
 
 	ownerPlayer = Cast<AGTA_Player>(GetOwner());
 
-	ownerPlayer->SetupInputDelegate.AddUObject(this, &UGTA_PlayerBaseComponent::SetupPlayerInputComponent);
+	ownerPlayer->SetupInputDelegate.AddUObject(this, &UGTA_PlayerBaseComponent::SetupPlayerInput);
 }
 

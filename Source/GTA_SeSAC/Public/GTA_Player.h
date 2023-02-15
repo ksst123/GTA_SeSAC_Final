@@ -32,10 +32,22 @@ public:
 	class USpringArmComponent* SpringArmComponent;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Camera Settings")
 	class UCameraComponent* CameraComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "My Character Settings")
+	class USphereComponent* RightFistCollision;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "My Character Settings")
+	class USphereComponent* LeftFistCollision;
 
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputMappingContext* DefaultInputMapping;
+
+
+	UPROPERTY()
+	class UGTA_PlayerAnimInstance* BPAnim;
+
+
+	UPROPERTY()
+	class AGTA_SeSACGameModeBase* GameMode;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Character Settings")
@@ -47,9 +59,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	class UGTA_PlayerMoveComponent* MoveComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class UGTA_PlayerHandFightComponent* HandFightComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class UGTA_PlayerFireComponent* FireComponent;
+	class UGTA_PlayerFightComponent* FightComponent;
+
+
+	APlayerController* PlayerController;
 
 
 	FSetupInputDelegate SetupInputDelegate;

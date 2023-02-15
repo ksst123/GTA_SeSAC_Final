@@ -24,7 +24,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInput(class UInputComponent* PlayerInputComponent) override;
 
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
@@ -36,19 +36,18 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputTurnRight;
 
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputJump;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputRun;
 
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputInteract;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
-	class UInputAction* InputHand;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputCover;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
-	class UInputAction* InputPistol;
+
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "My Movement Settings")
@@ -72,9 +71,4 @@ public:
 
 	void OnActionStartCover();
 	void OnActionEndCover();
-
-	UFUNCTION(BlueprintCallable)
-	void OnActionHand();
-	UFUNCTION(BlueprintCallable)
-	void OnActionPistol();
 };

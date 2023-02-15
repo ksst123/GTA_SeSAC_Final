@@ -26,11 +26,10 @@ public:
 
 	virtual void InitializeComponent() override;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+	virtual void SetupPlayerInput(class UInputComponent* PlayerInputComponent)
 	{
-
+		
 	}
-
 
 	UPROPERTY()
 	class AGTA_Player* ownerPlayer;

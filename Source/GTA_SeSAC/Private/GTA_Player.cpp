@@ -2,12 +2,15 @@
 
 
 #include "GTA_Player.h"
+
+#include "GTA_PlayerAnimInstance.h"
+#include "GTA_PlayerFightComponent.h"
 #include "GTA_PlayerMoveComponent.h"
-#include "GTA_PlayerFireComponent.h"
-#include "GTA_PlayerHandFightComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInput/Public/EnhancedInputSubsystems.h"
+#include "Components/SphereComponent.h"
+
 
 // Sets default values
 AGTA_Player::AGTA_Player()
@@ -27,9 +30,23 @@ AGTA_Player::AGTA_Player()
 	CameraComponent->bUsePawnControlRotation = false;
 
 
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+
+
 	MoveComponent = CreateDefaultSubobject<UGTA_PlayerMoveComponent>(TEXT("Move Component"));
-	FireComponent = CreateDefaultSubobject<UGTA_PlayerFireComponent>(TEXT("Fire Component"));
-	HandFightComponent = CreateDefaultSubobject<UGTA_PlayerHandFightComponent>(TEXT("Hand Fight Component"));
+	FightComponent = CreateDefaultSubobject<UGTA_PlayerFightComponent>(TEXT("Fight Component"));
+
+
+	RightFistCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Right Fist Collision"));
+	RightFistCollision->SetupAttachment(GetMesh(), TEXT("hand_rFistSocket"));
+	RightFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	LeftFistCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Left Fist Collision"));
+	LeftFistCollision->SetupAttachment(GetMesh(), TEXT("hand_lFistSocket"));
+	LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
 
 }
 
@@ -39,7 +56,7 @@ void AGTA_Player::BeginPlay()
 	Super::BeginPlay();
 
 	// Get the player controller
-	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	PlayerController = Cast<APlayerController>(GetController());
 
 	if (PlayerController != nullptr)
 	{
@@ -53,6 +70,13 @@ void AGTA_Player::BeginPlay()
 			Subsystem->AddMappingContext(DefaultInputMapping, 0);
 		}
 	}
+
+
+	CurrentHP = MaxHP;
+
+
+	// 애니메이션 블루프린트
+	BPAnim = Cast<UGTA_PlayerAnimInstance>(GetMesh()->GetAnimInstance());
 }
 
 // Called every frame

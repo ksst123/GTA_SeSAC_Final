@@ -15,7 +15,8 @@ UGTA_PlayerMoveComponent::UGTA_PlayerMoveComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+
+
 }
 
 
@@ -24,8 +25,11 @@ void UGTA_PlayerMoveComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+
+	ownerPlayer->GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+
+
+	ownerPlayer->GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 
@@ -37,10 +41,8 @@ void UGTA_PlayerMoveComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	// ...
 }
 
-void UGTA_PlayerMoveComponent::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void UGTA_PlayerMoveComponent::SetupPlayerInput(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 	// Get the EnhancedInputComponent
 	UEnhancedInputComponent* EnhancedInputComp = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 
@@ -48,13 +50,20 @@ void UGTA_PlayerMoveComponent::SetupPlayerInputComponent(UInputComponent* Player
 	EnhancedInputComp->BindAction(InputMoveVertical, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionMoveVertical);
 	EnhancedInputComp->BindAction(InputMoveHorizontal, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionMoveHorizontal);
 
+
 	EnhancedInputComp->BindAction(InputLookUp, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionLookUp);
 	EnhancedInputComp->BindAction(InputTurnRight, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionTurnRight);
 
+
 	EnhancedInputComp->BindAction(InputJump, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionJump);
+
 
 	EnhancedInputComp->BindAction(InputRun, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionRunPressed);
 	EnhancedInputComp->BindAction(InputRun, ETriggerEvent::Completed, this, &UGTA_PlayerMoveComponent::OnActionRunReleased);
+
+
+	EnhancedInputComp->BindAction(InputCover, ETriggerEvent::Triggered, this, &UGTA_PlayerMoveComponent::OnActionStartCover);
+	EnhancedInputComp->BindAction(InputCover, ETriggerEvent::Completed, this, &UGTA_PlayerMoveComponent::OnActionEndCover);
 }
 
 void UGTA_PlayerMoveComponent::OnActionMoveVertical(const FInputActionValue& Value)
@@ -141,12 +150,3 @@ void UGTA_PlayerMoveComponent::OnActionStartCover()
 void UGTA_PlayerMoveComponent::OnActionEndCover()
 {
 }
-
-void UGTA_PlayerMoveComponent::OnActionHand()
-{
-}
-
-void UGTA_PlayerMoveComponent::OnActionPistol()
-{
-}
-
