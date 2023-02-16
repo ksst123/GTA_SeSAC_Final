@@ -116,7 +116,7 @@ void UGTA_PlayerFightComponent::OnActionJap()
 		bIsJap = true;
 		ownerPlayer->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		ownerPlayer->PlayAnimMontage(ownerPlayer->BPAnim->PunchJap, 1.f, TEXT("Default"));
-		ownerPlayer->BPAnim->AnimNotify_JapEnd();
+		ownerPlayer->BPAnim->AnimNotify_Jap();
 	}
 }
 
@@ -129,7 +129,7 @@ void UGTA_PlayerFightComponent::OnActionStraight()
 		bIsStraight = true;
 		ownerPlayer->RightFistCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		ownerPlayer->PlayAnimMontage(ownerPlayer->BPAnim->PunchStraight, 1.f, TEXT("Default"));
-		ownerPlayer->BPAnim->AnimNotify_StraightEnd();
+		ownerPlayer->BPAnim->AnimNotify_Straight();
 	}
 }
 

@@ -51,13 +51,9 @@ public:
 
 
 	UFUNCTION()
-	void AnimNotify_JapEnd();
+	void AnimNotify_Jap();
 	UFUNCTION()
-	void AnimNotify_StraightEnd();
-	UFUNCTION()
-	void AnimNotify_DamagedJapEnd();
+	void AnimNotify_Straight();
 	UFUNCTION()
 	void AnimNotify_DamagedStraightEnd();
-	UFUNCTION()
-	void AnimNotify_DamagedFistDie();
 };

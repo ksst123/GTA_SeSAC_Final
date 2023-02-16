@@ -4,6 +4,7 @@
 #include "GTA_PlayerAnimInstance.h"
 #include "GTA_Player.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/SphereComponent.h"
 
 void UGTA_PlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
@@ -20,22 +21,16 @@ void UGTA_PlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	}
 }
 
-void UGTA_PlayerAnimInstance::AnimNotify_JapEnd()
+void UGTA_PlayerAnimInstance::AnimNotify_Jap()
 {
+	ownerPlayer->LeftFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-void UGTA_PlayerAnimInstance::AnimNotify_StraightEnd()
+void UGTA_PlayerAnimInstance::AnimNotify_Straight()
 {
-}
-
-void UGTA_PlayerAnimInstance::AnimNotify_DamagedJapEnd()
-{
+	ownerPlayer->RightFistCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void UGTA_PlayerAnimInstance::AnimNotify_DamagedStraightEnd()
-{
-}
-
-void UGTA_PlayerAnimInstance::AnimNotify_DamagedFistDie()
 {
 }
